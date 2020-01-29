@@ -12,11 +12,10 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import HomePage from './HomePage';
 
-export default function HomePage() {
+export default function HomePageContainer() {
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
+   <HomePage firstName="1" lastName="1"/>
   );
 }
