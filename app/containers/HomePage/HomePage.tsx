@@ -31,9 +31,7 @@ const HomePage: React.FC<IHomePageProps> = IHomePageProps => {
           Hello World
         </Button>
         <h1>!</h1>
-        <CurrencyCalculator>
-            
-        </CurrencyCalculator>
+        <CurrencyCalculator/>
       </Styles.CurrencyCalculator>
       <Styles.Footer>
         <h1>!</h1>

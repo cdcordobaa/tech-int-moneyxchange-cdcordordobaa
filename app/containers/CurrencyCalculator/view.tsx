@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Styles } from './styles';
-
+import { useInjectReducer } from 'utils/injectReducer';
+import currencyCalculatorSlice from 'data/ducks/currencies/reducers';
 export interface ICurrencyCalculatorViewProps {
 }
 
@@ -11,6 +12,9 @@ const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (props: I
         eu: 1,
         cop: 1,
     };
+
+    useInjectReducer({ key: 'currencies', reducer: currencyCalculatorSlice.reducer });
+
 
     const inputsList = () => {
 

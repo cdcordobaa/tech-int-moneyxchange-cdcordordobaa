@@ -12,7 +12,7 @@ const CurrencyContainer = styled.div`
 const CurrenciesRow = styled.div`
     display: flex;
 
-`
+`;
 const CurrencyInput = styled.input`
     min-width: 250px;
 `;

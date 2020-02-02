@@ -25,4 +25,5 @@ export interface ApplicationRootState {
   readonly language: LanguageProviderState;
   // for testing purposes
   readonly test: any;
+  readonly currencies: any;
 }

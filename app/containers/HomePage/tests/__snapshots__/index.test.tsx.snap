@@ -1,9 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
-<h1>
-  <span>
-    This is the HomePage container!
-  </span>
-</h1>
+<div
+  class="sc-bdVaJa dVxRJF"
+>
+  <div
+    class="sc-bwzfXH bCeEuM"
+  >
+    <div
+      class="sc-bxivhb klOISa"
+    >
+      <img
+        height="120px"
+        src="https://www.shutterstock.com/es/search/insta+icon?page=3"
+        width="120px"
+      />
+    </div>
+    <div
+      class="sc-htpNat ioPMpG"
+    >
+      <button>
+        hi
+      </button>
+      <button>
+        ho
+      </button>
+      <button>
+        hu
+      </button>
+      <button>
+        ha
+      </button>
+    </div>
+  </div>
+  <div
+    class="sc-ifAKCX ghWAJS"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Hello World
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <h1>
+      !
+    </h1>
+    <div
+      class="sc-bZQynM ikkIMu"
+    >
+      <button
+        class="sc-dnqmqq bLLhFA"
+      >
+        <div
+          class="sc-gzVnrw jarLct"
+        >
+          <input
+            class="sc-htoDjs drHtgw"
+            name="currency"
+            type="number"
+            value="currency"
+          />
+          <input
+            class="sc-htoDjs drHtgw"
+            name="currency"
+            type="number"
+            value="currency"
+          />
+          <input
+            class="sc-htoDjs drHtgw"
+            name="currency"
+            type="number"
+            value="currency"
+          />
+        </div>
+      </button>
+    </div>
+  </div>
+  <div
+    class="sc-EHOje esvYwE"
+  >
+    <h1>
+      !
+    </h1>
+  </div>
+</div>
 `;
