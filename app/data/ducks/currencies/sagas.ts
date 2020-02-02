@@ -11,7 +11,7 @@ export function* getRepos() {
   const url = 'http://data.fixer.io/api/latest?access_key=3aaa40824b81223980e5657a48e8ad23&format=1';
 
   const state = yield select(makeSelectCurrencies());
-  console.log("what", state);
+  console.log('what', state);
 
   try {
     // Call our request helper (see 'utils/request')
@@ -19,7 +19,7 @@ export function* getRepos() {
     const res = yield call(request, url);
     // yield put(reposLoaded(repos, username));
 
-    console.log("sssup",res);
+    console.log('sssup', res);
     yield put({ type: 'SET_CUNRRENCIES', payload: {response: res}});
   } catch (err) {
       console.log('uy whaats up');
