@@ -1,5 +1,5 @@
 import styled from 'styles/styled-components';
-
+import Avatar from '@material-ui/core/Avatar';
 
 const HomeContainer = styled.div`
     display: flex;
@@ -14,13 +14,15 @@ const UserGretings = styled.div`
     padding: 2rem 0 2rem 0;
     flex: 1;
     justify-content: center;
+    padding: 0% 15%;
 `;
 
 const UserButtons = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    padding: 1.5rem 20%;
 `;
 
 const UserLogo = styled.div`
@@ -35,8 +37,15 @@ const CurrencyCalculator = styled.div`
 `;
 
 const Footer = styled.div`
-    flex:1;
-    background: burlywood;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #ececec;
+`;
+
+const StyledAvatar = styled(Avatar)`
+    width: 8rem !important;
+    height: 8rem !important;
 `;
 
 export const Styles = {
@@ -46,4 +55,5 @@ export const Styles = {
     UserLogo,
     CurrencyCalculator,
     Footer,
+    StyledAvatar,
 };
