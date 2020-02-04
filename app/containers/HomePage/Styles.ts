@@ -5,6 +5,7 @@ const HomeContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-y: scroll;
 `;
 
 const UserGretings = styled.div`
@@ -33,7 +34,7 @@ const UserLogo = styled.div`
 
 const CurrencyCalculator = styled.div`
     flex:1;
-    background: aquamarine;
+    /* background: aquamarine; */
 `;
 
 const Footer = styled.div`

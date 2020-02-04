@@ -1,3 +1,6 @@
+import { string } from 'prop-types';
+import { type } from 'os';
+
 interface ICurrencieValues {
     USD: number;
     EUR: number;
@@ -5,16 +8,23 @@ interface ICurrencieValues {
     CNY: number;
 }
 
-interface ICurrentMultipliers extends ICurrencieValues {
-    base: number;
+interface ICurrentMultipliers extends Partial<ICurrencieValues> {
+    base?: number;
 }
 
 interface ICurrenciesState {
     currencies: ICurrencieValues;
+    traking_reports: {
+        [key: string]: ItrakingReports,
+    };
+}
+
+interface ItrakingReports {
+    name: string;
     currentSelectedCurrency: string;
     currenciesMultipliers: ICurrentMultipliers;
-
 }
+
 
 interface IsetMultiplierAction {
     type: string;
@@ -31,14 +41,16 @@ const currenciesInitialState: ICurrenciesState = {
         COP: 0,
         CNY: 0,
     },
-    currenciesMultipliers: {
-        USD: 0,
-        EUR: 0,
-        COP: 0,
-        CNY: 0,
-        base: 1,
+    traking_reports: {
+        default: {
+            name: 'default',
+            currenciesMultipliers: {
+                USD: 0,
+                EUR: 0,
+            },
+            currentSelectedCurrency: 'USD',
+        },
     },
-    currentSelectedCurrency: 'USD',
 };
 
 
