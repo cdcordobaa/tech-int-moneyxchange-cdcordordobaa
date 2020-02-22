@@ -18,6 +18,9 @@ const CurrencyContainer = styled.div`
     height: 100%;
     justify-content: space-evenly;
     align-items: center;
+    background: #AAC;
+    background: linear-gradient(180deg, #686d73, #6c7a80, #686d73);
+    color: white;
 `;
 
 const CurrenciesRow = styled.div`
@@ -42,10 +45,18 @@ const BigCalculateButton = styled.button`
     min-height: 80px;
 `;
 
+const SaveReport = styled(Button)`
+    color: white !important;
+    background: palevioletred !important;
+    padding: .8rem 1.1rem;
+
+`;
+
 export const Styles = {
     CurrencyContainer,
     CurrenciesRow,
     CurrencyInput,
     CurrencyInputsContainer,
     SuperCoolButton,
+    SaveReport,
 };

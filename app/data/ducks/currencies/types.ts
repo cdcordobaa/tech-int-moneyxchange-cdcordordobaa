@@ -13,6 +13,7 @@ interface ICurrentMultipliers extends Partial<ICurrencieValues> {
 }
 
 interface ICurrenciesState {
+    current_report: string;
     currencies: ICurrencieValues;
     traking_reports: {
         [key: string]: ItrakingReports,
@@ -35,6 +36,7 @@ interface IsetMultiplierAction {
 }
 
 const currenciesInitialState: ICurrenciesState = {
+    current_report: 'default',
     currencies: {
         USD: 0,
         EUR: 0,

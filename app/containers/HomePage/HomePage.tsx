@@ -1,6 +1,6 @@
 import React from 'react';
-import { Styles } from './Styles';
-import CurrencyCalculator from '../CurrencyCalculator/view';
+import { Styles } from './styles';
+import CurrencyCalculator from '../CurrencyCalculator/CurrencyCalculator';
 import FooterElement from 'components/FooterElement/FooterElement';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';

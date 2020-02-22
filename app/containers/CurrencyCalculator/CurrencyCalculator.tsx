@@ -4,41 +4,21 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
 import currencyCalculatorSlice from 'data/ducks/currencies/reducers';
 import saga from 'data/ducks/currencies/sagas';
-import clsx from 'clsx';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import FilledInput from '@material-ui/core/FilledInput';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import Save from '@material-ui/icons/Save';
 import AddInputDialog from 'components/AddInputDialog/AddInputDialog';
-
 import { makeSelectCurrencies } from 'data/ducks/currencies/selectors';
-import { ICurrenciesState } from 'data/ducks/currencies/types';
+import { Grid } from '@material-ui/core';
 
 const stateSelector = createStructuredSelector({
   currencies: makeSelectCurrencies(),
 });
 
-const currenciesPicker = {
-  USD: 1,
-  EUR: 2,
-};
+export interface ICurrencyCalculatorViewProps {
 
-const currentList = ['USD', 'EUR'];
-
-export interface ICurrencyCalculatorViewProps {}
+}
 
 const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
   props: ICurrencyCalculatorViewProps,
@@ -76,8 +56,7 @@ const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
             type="number"
           />
         </Styles.CurrencyInput>
-        )
-        ,
+        ),
       );
     });
     return <Styles.CurrenciesRow>{inputs}</Styles.CurrenciesRow>;
@@ -86,6 +65,10 @@ const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
   const handleCurrencySelect = currency => {
     console.log('maahn', currency);
     currentReport = { ...currentReport, [currency]: 1 };
+    console.log('sss', currentReport);
+    const currentSelectedCurrency = currencies.traking_reports.currentSelectedCurrency;
+    const multiplier = 29;
+    dispatch(currencyCalculatorSlice.actions.setMultiPlier({currentSelectedCurrency: 'USD', multiplier}));
   };
 
   return (
@@ -98,8 +81,17 @@ const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
         />
       </Styles.CurrencyInputsContainer>
       <Styles.SuperCoolButton>
-          Calcualte Currency exchange
+        Calcualte Currency exchange
       </Styles.SuperCoolButton>
+      <Grid container spacing={1} alignItems="flex-end" justify="center">
+        <Grid item>
+          <Save />
+        </Grid>
+        <Grid item>
+          <TextField id="input-with-icon-grid" label="Save Report As" />
+        </Grid>
+      </Grid>
+      <Styles.SaveReport>Save</Styles.SaveReport>
     </Styles.CurrencyContainer>
   );
 };
