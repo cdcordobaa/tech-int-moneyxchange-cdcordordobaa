@@ -14,18 +14,18 @@ const currencyCalculatorSlice = createSlice({
       // state.traking_reports.default.currenciesMultipliers[
       //   action.payload.currentSelectedCurrency
       // ] = action.payload.multiplier;
-      let currencies = state.traking_reports.default.currenciesMultipliers;
+      const currencies = state.traking_reports.default.currenciesMultipliers;
       for (const currency in currencies) {
         if (currencies[currency]) {
           currencies[currency] =
             action.payload.multiplier * state.currencies[currency];
         }
       }
-      //state.traking_reports.default.currenciesMultipliers = currencies;
-      console.log("in reducer", currencies);
+      // state.traking_reports.default.currenciesMultipliers = currencies;
+      console.log('in reducer', currencies);
     },
     addCurrencieToReport: (state: ICurrenciesState, action: IaddCurrencieToReport) => {
-      let currencies = {...state.traking_reports.default.currenciesMultipliers, [action.payload.addedCurrency]: 1};
+      const currencies = {...state.traking_reports.default.currenciesMultipliers, [action.payload.addedCurrency]: 1};
       for (const currency in currencies) {
         if (currencies[currency]) {
           currencies[currency] =
@@ -33,7 +33,7 @@ const currencyCalculatorSlice = createSlice({
         }
       }
       state.traking_reports.default.currenciesMultipliers = currencies;
-      console.log("in reducer", currencies);
+      console.log('in reducer', currencies);
     },
   },
 });
