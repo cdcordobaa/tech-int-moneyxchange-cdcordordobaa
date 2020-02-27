@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Styles } from './styles';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -16,59 +16,91 @@ const stateSelector = createStructuredSelector({
   currencies: makeSelectCurrencies(),
 });
 
-export interface ICurrencyCalculatorViewProps {
-
-}
+export interface ICurrencyCalculatorViewProps {}
 
 const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
   props: ICurrencyCalculatorViewProps,
 ) => {
+  // state attributes
+  const [defaultCurrencyValue, setdefaultCurrencyValue] = useState(0);
+  const [reportName, setreportName] = useState('default');
+  const [currentStateReport, setcurrentStateReport] = useState({});
+
   const { currencies } = useSelector(stateSelector);
   const dispatch = useDispatch();
-  console.log('uy', currencies);
-
   useInjectReducer({
     key: 'currencies',
     reducer: currencyCalculatorSlice.reducer,
   });
   useInjectSaga({ key: 'currencies', saga: saga });
 
-  const allCurrencies: any[] = Object.keys(currencies.currencies);
   const selectedCurrency =
     currencies.traking_reports.default.currentSelectedCurrency;
-  let currentReport = currencies.traking_reports.default.currenciesMultipliers;
+  const report = currencies.traking_reports.default;
+
+  useEffect(() => {
+    setcurrentStateReport(
+      report.currenciesMultipliers,
+    );
+    setdefaultCurrencyValue(
+      report.currenciesMultipliers[
+        selectedCurrency
+      ],
+    );
+  }, [currencies]);
 
   const inputsList = () => {
     const inputs = new Array<React.ReactElement>();
-    Object.keys(currentReport).forEach((currency, index) => {
+    Object.keys(currentStateReport).forEach((currency, index) => {
       const readonly = currency !== selectedCurrency;
       inputs.push(
-        (
+        // tslint:disable-next-line: jsx-wrap-multiline
         <Styles.CurrencyInput>
           <TextField
+            key={index}
             id="outlined-read-only-input"
             label={currency}
-            defaultValue={currentReport[currency]}
+            value={
+              !readonly ? defaultCurrencyValue : currentStateReport[currency]
+            }
             InputProps={{
               readOnly: readonly,
             }}
             variant="outlined"
             type="number"
+            onChange={ev => {
+              if (!readonly) {
+                setdefaultCurrencyValue(parseInt(ev.target.value, 10));
+              }
+            }}
           />
-        </Styles.CurrencyInput>
-        ),
+        </Styles.CurrencyInput>,
       );
     });
     return <Styles.CurrenciesRow>{inputs}</Styles.CurrenciesRow>;
   };
 
   const handleCurrencySelect = currency => {
-    console.log('maahn', currency);
-    currentReport = { ...currentReport, [currency]: 1 };
-    console.log('sss', currentReport);
-    const currentSelectedCurrency = currencies.traking_reports.currentSelectedCurrency;
-    const multiplier = 29;
-    dispatch(currencyCalculatorSlice.actions.setMultiPlier({currentSelectedCurrency: 'USD', multiplier}));
+    dispatch(
+      currencyCalculatorSlice.actions.addCurrencieToReport({
+        currentSelectedCurrency: report.currentSelectedCurrency ,
+        multiplier: defaultCurrencyValue,
+        addedCurrency: currency,
+      }),
+    );
+  };
+
+  const onCalculateCurrencyClick = () => {
+    dispatch(
+      currencyCalculatorSlice.actions.setMultiPlier({
+        currentSelectedCurrency: report.currentSelectedCurrency,
+        multiplier: defaultCurrencyValue,
+      }),
+    );
+  };
+
+  const onReportSave = () => {
+    setreportName('');
   };
 
   return (
@@ -76,11 +108,11 @@ const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
       <Styles.CurrencyInputsContainer>
         {inputsList()}
         <AddInputDialog
-          currenciesList={allCurrencies}
+          currenciesList={Object.keys(currencies.currencies)}
           onSelectCurrency={handleCurrencySelect}
         />
       </Styles.CurrencyInputsContainer>
-      <Styles.SuperCoolButton>
+      <Styles.SuperCoolButton onClick={onCalculateCurrencyClick}>
         Calcualte Currency exchange
       </Styles.SuperCoolButton>
       <Grid container spacing={1} alignItems="flex-end" justify="center">
@@ -88,10 +120,14 @@ const CurrencyCalculatorView: React.FC<ICurrencyCalculatorViewProps> = (
           <Save />
         </Grid>
         <Grid item>
-          <TextField id="input-with-icon-grid" label="Save Report As" />
+          <TextField
+            onChange={ev => setreportName(ev.target.value)}
+            id="input-with-icon-grid"
+            label="Save Report As"
+          />
         </Grid>
       </Grid>
-      <Styles.SaveReport>Save</Styles.SaveReport>
+      <Styles.SaveReport onClick={onReportSave}>Save</Styles.SaveReport>
     </Styles.CurrencyContainer>
   );
 };

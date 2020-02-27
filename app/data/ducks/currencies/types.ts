@@ -32,23 +32,34 @@ interface IsetMultiplierAction {
     payload: {
         currentSelectedCurrency: string,
         multiplier: number,
+        reportName?: string,
+        addedCurrency?: string,
+    };
+}
+
+interface IaddCurrencieToReport extends IsetMultiplierAction {
+    payload: {
+        currentSelectedCurrency: string,
+        multiplier: number,
+        reportName?: string,
+        addedCurrency: string,
     };
 }
 
 const currenciesInitialState: ICurrenciesState = {
     current_report: 'default',
     currencies: {
-        USD: 0,
-        EUR: 0,
-        COP: 0,
-        CNY: 0,
+        USD: 1,
+        EUR: 0.5,
+        COP: 2,
+        CNY: 3,
     },
     traking_reports: {
         default: {
             name: 'default',
             currenciesMultipliers: {
-                USD: 0,
-                EUR: 0,
+                USD: 1,
+                EUR: 5,
             },
             currentSelectedCurrency: 'USD',
         },
@@ -62,4 +73,5 @@ export {
     ICurrenciesState,
     currenciesInitialState,
     IsetMultiplierAction,
+    IaddCurrencieToReport,
 };

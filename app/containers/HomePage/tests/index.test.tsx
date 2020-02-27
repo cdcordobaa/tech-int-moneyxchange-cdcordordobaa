@@ -28,7 +28,7 @@ describe('<HomePage />', () => {
         </IntlProvider>
       </Provider>,
     );
-    //expect(firstChild).toMatchSnapshot();
+    // expect(firstChild).toMatchSnapshot();
     expect(true).toBe(true);
   });
 });
